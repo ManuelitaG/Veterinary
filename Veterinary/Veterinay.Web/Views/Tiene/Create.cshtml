@@ -1,0 +1,23 @@
+﻿@model TieneDTO
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form asp-action="Create" method="post">
+
+<div class="mb-3">
+    <label class="form-label">Especialidad</label>
+    <select asp-for="EspecialidadId" asp-items="Model.Especialidades" class="form-control"></select>
+    <span asp-validation-for="EspecialidadId" class="text-danger"></span>
+
+</div>
+
+    <div class="mb-3">
+        <label class="form-label">Veterinario</label>
+        <select asp-for="VeterinarioId" asp-items="Model.Veterinarios" class="form-control"></select>
+        <span asp-validation-for="VeterinarioId" class="text-danger"></span>
+
+    </div>
+</form>

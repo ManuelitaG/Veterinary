@@ -1,0 +1,77 @@
+﻿@model List<Especialidad>
+@{
+    ViewData["Title"] = "Especialidades";
+}
+
+<h1>Autores</h1>
+
+<!--El asp-action hace referencia al metodo que va a ejecutar ese boton-->
+<a class="btn btn-primary" asp-action="Create">+ Nuevo Autor</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripcion</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        <!--Se llena el cuerpo de la tabla con los datos contenidos en el modelo-->
+        @foreach (Especialidad especialidad in Model)
+        {
+            <tr>
+                <td>@especialidad.Id</td>
+                <td>@especialidad.Descripcion</td>
+                <td>
+                    <a class="btn btn-warning " asp-action="Edit" asp-route-id="@especialidad.Id">Editar</a>
+
+                    <form asp-action="Delete" asp-route-id="@especialidad.Id" method="post" style="display: contents;">
+                        <button class="btn btn-danger btnDelete">Eliminar</button>
+                    </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function(){
+
+            $('.btnDelete').click(function(event){
+
+                event.preventDefault();
+
+               Swal.fire({
+              title: "¿Estas seguro de eliminar el autor?",
+              text: "No podras revertir este cambio",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Si, eliminar",
+              cancelButtonText: "No, eliminar"
+
+            }).then((result) => {
+
+              if (result.isConfirmed) {
+
+                  const deleteForm = $(this).closest('form');
+                  deleteForm.submit();
+
+              }
+
+            });
+
+            })
+
+        })
+
+    </script>
+}
+
